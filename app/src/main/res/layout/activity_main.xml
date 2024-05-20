@@ -33,20 +33,20 @@
       android:id="@+id/progressView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:beerColor="@color/rootBeerColor"
+      app:beerColor="@color/rnibColor"
       app:beerProgress="0"
       app:waveAmplitude="3dp"
       app:waveMax="100" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rootResultsRecycler"
+      android:id="@+id/rniResultsRecycler"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:paddingTop="4dp"
-      tools:listitem="@layout/item_root_check" />
+      tools:listitem="@layout/item_rni_check" />
 
-    <com.scottyab.rootbeer.sample.ui.RootedResultTextView
-      android:id="@+id/isRootedTextView"
+    <com.inr.rnib.sample.ui.DRNIResultTextView
+      android:id="@+id/isDRNITextView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"

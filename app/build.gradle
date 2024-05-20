@@ -8,26 +8,26 @@ android {
     buildToolsVersion buildToolsVer
 
     defaultConfig {
-        applicationId "com.scottyab.rootbeer.sample"
+        applicationId "com.inr.rnib.sample"
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
         versionCode 10
         versionName "0.9"
         vectorDrawables.useSupportLibrary = true
 
-        archivesBaseName = "RootBeerSample-$versionName-[$versionCode]"
+        archivesBaseName = "RNIBSample-$versionName-[$versionCode]"
 
     }
 
     //check if the keystore details are defined in gradle.properties (this is so the key is not in github)
-    if (project.hasProperty("ROOTBEER_SAMPLE_STORE")) {
+    if (project.hasProperty("RNIB_SAMPLE_STORE")) {
         signingConfigs {
             //from ~/user/.gradle/gradle.properties
             release {
-                storeFile file(ROOTBEER_SAMPLE_STORE)
-                keyAlias ROOTBEER_SAMPLE_KEY
-                storePassword ROOTBEER_SAMPLE_STORE_PASS
-                keyPassword ROOTBEER_SAMPLE_KEY_PASS
+                storeFile file(RNIB_SAMPLE_STORE)
+                keyAlias RNIB_SAMPLE_KEY
+                storePassword RNIB_SAMPLE_STORE_PASS
+                keyPassword RNIB_SAMPLE_KEY_PASS
             }
         }
     }
@@ -39,7 +39,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
         release {
-            if (project.hasProperty("ROOTBEER_SAMPLE_STORE")) {
+            if (project.hasProperty("RNIB_SAMPLE_STORE")) {
                 signingConfig signingConfigs.release
             }
             minifyEnabled false
@@ -49,7 +49,7 @@ android {
 }
 
 dependencies {
-    implementation project(':rootbeerlib')
+    implementation project(':rniblib')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
