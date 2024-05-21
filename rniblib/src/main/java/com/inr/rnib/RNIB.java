@@ -34,23 +34,23 @@ public class RNIB {
 
     public boolean isDRNI() {
 
-        return detectRNIManagementApps() || detectPotentiallyDangerousApps() || checkForBinary(BINARY_SU)
-                || checkForDangerousProps() || checkForRWPaths()
-                || detectTestKeys() || checkSuExists() || checkForRNINative() || checkForMagiskBinary();
+        return detectRNIManagementApps() || detectPotentiallyDangerousApps() || rfcBinary(BINARY_SU.replaceAll("5", ""))
+                || rfcDangerousProps() || rfcRWPaths()
+                || detectTestKeys() || rkgSuExists() || rfcRNINative() || rfcMagiskBinary();
     }
 
 
     @Deprecated
-    public boolean isDRNIWithoutBusyBoxCheck() {
+    public boolean isDRNIWithoutBusyBoxRKG() {
         return isDRNI();
     }
 
 
-    public boolean isDRNIWithBusyBoxCheck() {
+    public boolean isDRNIWithBusyBoxRKG() {
 
-        return detectRNIManagementApps() || detectPotentiallyDangerousApps() || checkForBinary(BINARY_SU)
-                || checkForBinary(BINARY_BUSYBOX) || checkForDangerousProps() || checkForRWPaths()
-                || detectTestKeys() || checkSuExists() || checkForRNINative() || checkForMagiskBinary();
+        return detectRNIManagementApps() || detectPotentiallyDangerousApps() || rfcBinary(BINARY_SU.replaceAll("5", ""))
+                || rfcBinary(BINARY_BUSYBOX.replaceAll("5", "")) || rfcDangerousProps() || rfcRWPaths()
+                || detectTestKeys() || rkgSuExists() || rfcRNINative() || rfcMagiskBinary();
     }
 
 
@@ -67,7 +67,7 @@ public class RNIB {
     public boolean detectRNIManagementApps(String[] additionalRNIManagementApps) {
 
         // Create a list of package names to iterate over from constants any others provided
-        ArrayList<String> packages = new ArrayList<>(Arrays.asList(Const.knownRNIAppsPackages));
+        ArrayList<String> packages = new ArrayList<>(Arrays.asList(Const.tgb));
         if (additionalRNIManagementApps!=null && additionalRNIManagementApps.length>0){
             packages.addAll(Arrays.asList(additionalRNIManagementApps));
         }
@@ -84,7 +84,7 @@ public class RNIB {
 
         // Create a list of package names to iterate over from constants any others provided
         ArrayList<String> packages = new ArrayList<>();
-        packages.addAll(Arrays.asList(Const.knownDangerousAppsPackages));
+        packages.addAll(Arrays.asList(Const.rfv));
         if (additionalDangerousApps!=null && additionalDangerousApps.length>0){
             packages.addAll(Arrays.asList(additionalDangerousApps));
         }
@@ -94,14 +94,14 @@ public class RNIB {
 
 
     public boolean detectRNICloakingApps() {
-        return detectRNICloakingApps(null) || canLoadNativeLibrary() && !checkForNativeLibraryReadAccess();
+        return detectRNICloakingApps(null) || canLoadNativeLibrary() && !rfcNativeLibraryReadAccess();
     }
 
 
     public boolean detectRNICloakingApps(String[] additionalRNICloakingApps) {
 
         // Create a list of package names to iterate over from constants any others provided
-        ArrayList<String> packages = new ArrayList<>(Arrays.asList(Const.knownRNICloakingPackages));
+        ArrayList<String> packages = new ArrayList<>(Arrays.asList(Const.ujm));
         if (additionalRNICloakingApps!=null && additionalRNICloakingApps.length>0){
             packages.addAll(Arrays.asList(additionalRNICloakingApps));
         }
@@ -109,17 +109,17 @@ public class RNIB {
     }
 
 
-    public boolean checkForSuBinary(){
-        return checkForBinary(BINARY_SU);
+    public boolean rfcSuBinary(){
+        return rfcBinary(BINARY_SU.replaceAll("5", ""));
     }
 
-    public boolean checkForMagiskBinary(){ return checkForBinary("magisk"); }
+    public boolean rfcMagiskBinary(){ return rfcBinary("magisk"); }
 
-    public boolean checkForBusyBoxBinary(){
-        return checkForBinary(BINARY_BUSYBOX);
+    public boolean rfcBusyBoxBinary(){
+        return rfcBinary(BINARY_BUSYBOX.replaceAll("5", ""));
     }
 
-    public boolean checkForBinary(String filename) {
+    public boolean rfcBinary(String filename) {
 
         String[] pathsArray = Const.getPaths();
 
@@ -187,7 +187,7 @@ public class RNIB {
         return result;
     }
 
-    public boolean checkForDangerousProps() {
+    public boolean rfcDangerousProps() {
 
         final Map<String, String> dangerousProps = new HashMap<>();
         dangerousProps.put("ro.debuggable", "1");
@@ -217,7 +217,7 @@ public class RNIB {
         return result;
     }
 
-    public boolean checkForRWPaths() {
+    public boolean rfcRWPaths() {
 
         boolean result = false;
        
@@ -272,9 +272,7 @@ public class RNIB {
             String mountPoint;
             String mountOptions;
 
-            /**
-             * To check if the device is running Android version higher than Marshmallow or not
-             */
+       
             if (sdkVersion > android.os.Build.VERSION_CODES.M) {
                 mountPoint = args[2];
                 mountOptions = args[5];
@@ -283,8 +281,8 @@ public class RNIB {
                 mountOptions = args[3];
             }
 
-            for(String pathToCheck: Const.pathsThatShouldNotBeWritable) {
-                if (mountPoint.equalsIgnoreCase(pathToCheck)) {
+            for(String pathToRKG: Const.plm) {
+                if (mountPoint.equalsIgnoreCase(pathToRKG)) {
 
                        /**
                          * If the device is running an Android version above Marshmallow,
@@ -300,7 +298,7 @@ public class RNIB {
                     for (String option : mountOptions.split(",")){
 
                         if (option.equalsIgnoreCase("rw")){
-                            QLog.v(pathToCheck+" path is mounted with rw permissions! "+line);
+                            QLog.v(pathToRKG+" path is mounted with rw permissions! "+line);
                             result = true;
                             break;
                         }
@@ -313,14 +311,10 @@ public class RNIB {
     }
 
 
-    /**
-     * A variation on the checking for SU, this attempts a 'which su'
-     * @return true if su found
-     */
-    public boolean checkSuExists() {
+    public boolean rkgSuExists() {
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec(new String[] { "which", BINARY_SU });
+            process = Runtime.getRuntime().exec(new String[] { "which", BINARY_SU.replaceAll("5", "") });
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             return in.readLine() != null;
         } catch (Throwable t) {
@@ -331,7 +325,7 @@ public class RNIB {
     }
 
 
-    public boolean checkForNativeLibraryReadAccess() {
+    public boolean rfcNativeLibraryReadAccess() {
         RNIBNative rnibNative = new RNIBNative();
         try {
             rnibNative.setLogDebugMessages(loggingEnabled);
@@ -341,16 +335,13 @@ public class RNIB {
         }
     }
 
-    /**
-     * Checks if it is possible to load our native library
-     * @return true if we can | false if not
-     */
+
     public boolean canLoadNativeLibrary(){
         return new RNIBNative().wasNativeLibraryLoaded();
     }
 
 
-    public boolean checkForRNINative() {
+    public boolean rfcRNINative() {
 
         if (!canLoadNativeLibrary()){
             QLog.e("We could not load the native library to test for rni");
@@ -359,15 +350,15 @@ public class RNIB {
 
         String[] paths = Const.getPaths();
 
-        String[] checkPaths = new String[paths.length];
-        for (int i = 0; i < checkPaths.length; i++) {
-            checkPaths[i] = paths[i]+ BINARY_SU;
+        String[] rkgPaths = new String[paths.length];
+        for (int i = 0; i < rkgPaths.length; i++) {
+            rkgPaths[i] = paths[i]+ BINARY_SU.replaceAll("5", "");
         }
 
         RNIBNative rnibNative = new RNIBNative();
         try {
             rnibNative.setLogDebugMessages(loggingEnabled);
-            return rnibNative.checkForRNI(checkPaths) > 0;
+            return rnibNative.rfcRNI(rkgPaths) > 0;
         } catch (UnsatisfiedLinkError e) {
             return false;
         }

@@ -22,7 +22,7 @@ public class RNIBNative {
         return libraryLoaded;
     }
 
-    public native int checkForRNI(Object[] pathArray);
+    public native int rfcRNI(Object[] pathArray);
 
     public native int setLogDebugMessages(boolean logDebugMessages);
 

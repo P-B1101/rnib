@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.inr.rnib.sample.R
 import com.inr.rnib.sample.RNIItemResult
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_rni_check.view.*
+import kotlinx.android.synthetic.main.item_rni_rkg.view.*
 
 class RNIItemAdapter : RecyclerView.Adapter<RNIItemAdapter.RNIItemVH>() {
     private val items: MutableList<RNIItemResult> = mutableListOf()
@@ -22,7 +22,7 @@ class RNIItemAdapter : RecyclerView.Adapter<RNIItemAdapter.RNIItemVH>() {
         val inflater = LayoutInflater.from(parent.context)
         return RNIItemVH(
             inflater.inflate(
-                R.layout.item_rni_check,
+                R.layout.item_rni_rkg,
                 parent,
                 false
             )

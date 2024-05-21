@@ -4,20 +4,20 @@
     <string name="action_settings">Settings</string>
     <string name="action_github">Get on GitHub</string>
     <string name="action_info">info</string>
-    <string name="info_details">This is a sample app for RNIB - a simple to use rni checking Android library. RNIB gives an indication of rni. Remember rni==god, so there\'s no 100% way to check for rni.</string>
+    <string name="info_details">This is a sample app for RNIB - a simple to use rni rkging Android library. RNIB gives an indication of rni. Remember rni==god, so there\'s no 100% way to rkg for rni.</string>
 
     <string name="result_drni">DRNI*</string>
     <string name="result_not_drni">NOT DRNI</string>
 
-    <string name="rni_checks_1">RNI Management Apps</string>
-    <string name="rni_checks_2">Potentially Dangerous Apps</string>
-    <string name="rni_checks_3">Test Keys</string>
-    <string name="rni_checks_4">BusyBox Binary</string>
-    <string name="rni_checks_5">Su Binary</string>
-    <string name="rni_checks_6">Su Exists</string>
-    <string name="rni_checks_7">RW Paths</string>
-    <string name="rni_checks_8">Dangerous Props</string>
-    <string name="rni_checks_9">RNI Native</string>
-    <string name="rni_checks_10">RNI Cloaking Apps</string>
-    <string name="rni_checks_11">Selinux Flag Enabled (experimental)</string>
+    <string name="rni_rkgs_1">RNI Management Apps</string>
+    <string name="rni_rkgs_2">Potentially Dangerous Apps</string>
+    <string name="rni_rkgs_3">Test Keys</string>
+    <string name="rni_rkgs_4">BusyBox Binary</string>
+    <string name="rni_rkgs_5">Su Binary</string>
+    <string name="rni_rkgs_6">Su Exists</string>
+    <string name="rni_rkgs_7">RW Paths</string>
+    <string name="rni_rkgs_8">Dangerous Props</string>
+    <string name="rni_rkgs_9">RNI Native</string>
+    <string name="rni_rkgs_10">RNI Cloaking Apps</string>
+    <string name="rni_rkgs_11">Selinux Flag Enabled (experimental)</string>
 </resources>

@@ -10,7 +10,7 @@ class ResultIconView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : androidx.appcompat.widget.AppCompatImageView(context, attrs, defStyleAttr) {
 
-    fun showPass() = setImageResource(R.drawable.ic_check_circle_green_24dp)
+    fun showPass() = setImageResource(R.drawable.ic_rkg_circle_green_24dp)
 
     fun showFail() = setImageResource(R.drawable.ic_error_circle_outline_red_24dp)
 

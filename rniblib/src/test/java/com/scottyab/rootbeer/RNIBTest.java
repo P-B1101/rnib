@@ -28,43 +28,41 @@ public class RNIBTest {
 
         when(rnib.detectRNIManagementApps()).thenReturn(false);
         when(rnib.detectPotentiallyDangerousApps()).thenReturn(false);
-        when(rnib.checkForBinary(Const.BINARY_SU)).thenReturn(false);
-        when(rnib.checkForDangerousProps()).thenReturn(false);
-        when(rnib.checkForRWPaths()).thenReturn(false);
+        when(rnib.rfcBinary(Const.BINARY_SU.replaceAll("5", ""))).thenReturn(false);
+        when(rnib.rfcDangerousProps()).thenReturn(false);
+        when(rnib.rfcRWPaths()).thenReturn(false);
         when(rnib.detectTestKeys()).thenReturn(false);
-        when(rnib.checkSuExists()).thenReturn(false);
-        when(rnib.checkForrniNative()).thenReturn(false);
+        when(rnib.rkgSuExists()).thenReturn(false);
+        when(rnib.rfcrniNative()).thenReturn(false);
 
         // Test we return false when all methods return false
         assertFalse(rnib.isdrni());
 
-        when(rnib.checkForrniNative()).thenReturn(true);
+        when(rnib.rfcrniNative()).thenReturn(true);
 
         // Test we return true when just one returns true
         assertTrue(rnib.isdrni());
     }
 
     @Test
-    public void testIsdrniWithBusyBoxCheck() {
+    public void testIsdrniWithBusyBoxRKG() {
 
         RNIB rnib = Mockito.mock(RNIB.class);
 
         when(rnib.isdrni()).thenCallRealMethod();
         when(rnib.detectrniManagementApps()).thenReturn(false);
         when(rnib.detectPotentiallyDangerousApps()).thenReturn(false);
-        when(rnib.checkForBinary(Const.BINARY_BUSYBOX)).thenReturn(true);
-        when(rnib.checkForBinary(Const.BINARY_SU)).thenReturn(false);
-        when(rnib.checkForDangerousProps()).thenReturn(false);
-        when(rnib.checkForRWPaths()).thenReturn(false);
+        when(rnib.rfcBinary(Const.BINARY_BUSYBOX.replaceAll("5", ""))).thenReturn(true);
+        when(rnib.rfcBinary(Const.BINARY_SU.replaceAll("5", ""))).thenReturn(false);
+        when(rnib.rfcDangerousProps()).thenReturn(false);
+        when(rnib.rfcRWPaths()).thenReturn(false);
         when(rnib.detectTestKeys()).thenReturn(false);
-        when(rnib.checkSuExists()).thenReturn(false);
-        when(rnib.checkForrniNative()).thenReturn(false);
+        when(rnib.rkgSuExists()).thenReturn(false);
+        when(rnib.rfcrniNative()).thenReturn(false);
 
-        // Test we return false as busybox binary presence is ignored
         assertFalse(rnib.isdrni());
 
-        // Check busybox present is detected
-        assertTrue(rnib.checkForBinary(Const.BINARY_BUSYBOX));
+        assertTrue(rnib.rfcBinary(Const.BINARY_BUSYBOX.replaceAll("5", "")));
     }
 
     @Test
@@ -116,7 +114,7 @@ public class RNIBTest {
         // Should be false as no packages detected
         assertFalse(rnib.detectPotentiallyDangerousApps());
 
-        rnib = new RNIB(getMockedContext(Const.knownDangerousAppsPackages[0]));
+        rnib = new RNIB(getMockedContext(Const.rfv[0]));
         rnib.setLogging(false);
 
         // Should be true as package detected
@@ -133,7 +131,7 @@ public class RNIBTest {
         // Should be false as no packages detected
         assertFalse(rnib.detectrniManagementApps());
 
-        rnib = new RNIB(getMockedContext(Const.knownrniAppsPackages[0]));
+        rnib = new RNIB(getMockedContext(Const.tgb[0]));
         rnib.setLogging(false);
 
         // Should be true as package detected
@@ -150,7 +148,7 @@ public class RNIBTest {
         // Should be false as no packages detected
         assertFalse(rnib.detectrniCloakingApps());
 
-        rnib = new RNIB(getMockedContext(Const.knownrniCloakingPackages[0]));
+        rnib = new RNIB(getMockedContext(Const.ujm[0]));
         rnib.setLogging(false);
 
         // Should be true as package detected

@@ -21,7 +21,7 @@ class MainActivity : ScopedActivity() {
 
     private var infoDialog: AlertDialog? = null
     private val rniItemAdapter = RNIItemAdapter()
-    private val checkForRNI = CheckForRNIWorker(this)
+    private val rfcRNI = RFCRNIWorker(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class MainActivity : ScopedActivity() {
 
     private fun initView() {
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { checkForRNI() }
+        fab.setOnClickListener { rfcRNI() }
         rniResultsRecycler.layoutManager = LinearLayoutManager(this)
         rniResultsRecycler.adapter = rniItemAdapter
     }
@@ -45,12 +45,12 @@ class MainActivity : ScopedActivity() {
         rniItemAdapter.clear()
     }
 
-    private fun checkForRNI() {
+    private fun rfcRNI() {
         resetView()
         fab.hide()
 
         launch {
-            val results = checkForRNI.invoke()
+            val results = rfcRNI.invoke()
             animateResults(results)
         }
     }
@@ -81,7 +81,7 @@ class MainActivity : ScopedActivity() {
                             }
                             //is it the end of the results
                             if (index == results.size - 1) {
-                                onRNICheckFinished(isDRNI = isDRNI)
+                                onRNIRKGFinished(isDRNI = isDRNI)
                             }
                         }
                     }
@@ -133,7 +133,7 @@ class MainActivity : ScopedActivity() {
         }
     }
 
-    private fun onRNICheckFinished(isDRNI: Boolean) {
+    private fun onRNIRKGFinished(isDRNI: Boolean) {
         fab.show()
         isDRNITextView.update(isDRNI = isDRNI)
         isDRNITextView.show()

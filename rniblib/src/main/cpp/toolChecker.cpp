@@ -88,7 +88,7 @@ int exists(const char *fname)
  * Return value: int number of su binaries found
  *
  *****************************************************************************/
-int Java_com_inr_rootbeer_RootBeerNative_checkForRoot( JNIEnv* env, jobject thiz, jobjectArray pathsArray )
+int Java_com_inr_rootbeer_RootBeerNative_rfcRoot( JNIEnv* env, jobject thiz, jobjectArray pathsArray )
 {
 
     int binariesFound = 0;
