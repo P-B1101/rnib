@@ -1,11 +1,3 @@
-/****************************************************************************
- * File:   toolChecker.cpp
- * Author: Matthew Rollings
- * Date:   19/06/2015
- *
- * Description : Root checking JNI NDK code
- *
- ****************************************************************************/
 
 /****************************************************************************
  *>>>>>>>>>>>>>>>>>>>>>>>>> System Includes <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*
@@ -78,16 +70,6 @@ int exists(const char *fname)
 
 
 
-
-/*****************************************************************************
- * Description: Checks for root binaries
- *
- * Parameters: env - Java environment pointer
- *      thiz - javaobject
- *
- * Return value: int number of su binaries found
- *
- *****************************************************************************/
 int Java_com_inr_rnib_RNIBNative_rfcRoot( JNIEnv* env, jobject thiz, jobjectArray pathsArray )
 {
 
