@@ -29,7 +29,7 @@
  ****************************************************************************/
 
 // LOGCAT
-#define  LOG_TAG    "RootBeer"
+#define  LOG_TAG    "RNIB"
 #define  LOGD(...)  if (DEBUG) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__);
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__);
 
@@ -44,7 +44,7 @@ static int DEBUG = 1;
  * 	bool - true to log debug messages
  *
  *****************************************************************************/
-void Java_com_inr_rootbeer_RootBeerNative_setLogDebugMessages( JNIEnv* env, jobject thiz, jboolean debug)
+void Java_com_inr_rnib_RNIBNative_setLogDebugMessages( JNIEnv* env, jobject thiz, jboolean debug)
 {
   if (debug){
     DEBUG = 1;
@@ -88,7 +88,7 @@ int exists(const char *fname)
  * Return value: int number of su binaries found
  *
  *****************************************************************************/
-int Java_com_inr_rootbeer_RootBeerNative_rfcRoot( JNIEnv* env, jobject thiz, jobjectArray pathsArray )
+int Java_com_inr_rnib_RNIBNative_rfcRoot( JNIEnv* env, jobject thiz, jobjectArray pathsArray )
 {
 
     int binariesFound = 0;
